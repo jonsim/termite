@@ -9,12 +9,15 @@
 #include <ncurses.h>
 #include <stdint.h>
 
-#include "WMException.h"
+#include "IDrawable.h"
+
+
+namespace termite {
 
 /**
  * \brief TODO
  */
-class Window
+class Window : IDrawable
 {
 private:
     /** The ncurses window to draw into. */
@@ -36,6 +39,10 @@ public:
      *  \brief  Window destructor.
      */
     virtual ~Window(void);
+
+    virtual void redraw(void) const;
 };
+
+}
 
 #endif

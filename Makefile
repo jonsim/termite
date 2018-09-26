@@ -9,8 +9,8 @@ AR = ar
 C_FLAGS = -std=c++11 -Wall -pedantic
 dbg: C_FLAGS += -O0 -fno-omit-frame-pointer -g -DDEBUG
 rel: C_FLAGS += -O3
-LIB_C_FLAGS = -Isrc/termite
-APP_C_FLAGS = -Isrc/examples/basic
+LIB_C_FLAGS = -Itermite/inc
+APP_C_FLAGS = -Itermite/inc
 dbg: LIB_C_FLAGS += -MMD -MF $(LIB_DBG_DEP_DIR)/$*.d
 rel: LIB_C_FLAGS += -MMD -MF $(LIB_REL_DEP_DIR)/$*.d
 dbg: APP_C_FLAGS += -MMD -MF $(APP_DBG_DEP_DIR)/$*.d
@@ -25,7 +25,7 @@ rel: APP_L_FLAGS += -O3
 # to use target-specific variables as pre-requisites).
 # TODO: Just rewrite this whole thing, it hasn't scaled anywhere near as nicely
 # as I first envisaged.
-LIB_SRC_DIR = src/termite
+LIB_SRC_DIR = termite/src
 LIB_DBG_DIR = dbg/termite
 LIB_REL_DIR = rel/termite
 LIB_SRC_FILES = $(shell find $(LIB_SRC_DIR) -type f -name '*.cpp')
@@ -43,7 +43,7 @@ LIB_REL_OBJ_SUBDIRS = $(patsubst $(LIB_SRC_DIR)/%, $(LIB_REL_OBJ_DIR)/%, $(LIB_S
 LIB_DBG_DEP_SUBDIRS = $(patsubst $(LIB_SRC_DIR)/%, $(LIB_DBG_DEP_DIR)/%, $(LIB_SRC_SUBDIRS))
 LIB_REL_DEP_SUBDIRS = $(patsubst $(LIB_SRC_DIR)/%, $(LIB_REL_DEP_DIR)/%, $(LIB_SRC_SUBDIRS))
 
-APP_SRC_DIR = src/examples/basic
+APP_SRC_DIR = examples/basic
 APP_DBG_DIR = dbg/examples/basic
 APP_REL_DIR = rel/examples/basic
 APP_SRC_FILES = $(shell find $(APP_SRC_DIR) -type f -name '*.cpp')
