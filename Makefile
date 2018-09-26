@@ -17,7 +17,7 @@ dbg: APP_C_FLAGS += -MMD -MF $(APP_DBG_DEP_DIR)/$*.d
 rel: APP_C_FLAGS += -MMD -MF $(APP_REL_DEP_DIR)/$*.d
 
 # Linker flags
-APP_L_FLAGS = -std=c++11 -Wall -pedantic -lstdc++ -lpthread -lncurses -ltermite
+APP_L_FLAGS = -std=c++11 -Wall -pedantic -lstdc++ -lpthread -lncurses
 dbg: APP_L_FLAGS += -O0 -g -Wl,--no-as-needed -lSegFault
 rel: APP_L_FLAGS += -O3
 
@@ -76,10 +76,10 @@ $(APP_DBG_OBJ_DIR)/%.o $(APP_REL_OBJ_DIR)/%.o: $(APP_SRC_DIR)/%.cpp
 	$(CC) $(C_FLAGS) $(APP_C_FLAGS) -c -o $@ $<
 
 $(APP_DBG_DIR)/basic: $(APP_DBG_OBJ_FILES)
-	$(CC) -L$(LIB_DBG_DIR) $(APP_L_FLAGS) -o $@ $^
+	$(CC) -L$(LIB_DBG_DIR) $(APP_L_FLAGS) -o $@ $^ -ltermite
 
 $(APP_REL_DIR)/basic: $(APP_REL_OBJ_FILES)
-	$(CC) -L$(LIB_REL_DIR) $(APP_L_FLAGS) -o $@ $^
+	$(CC) -L$(LIB_REL_DIR) $(APP_L_FLAGS) -o $@ $^ -ltermite
 
 $(LIB_DBG_OBJ_DIR)     $(LIB_REL_OBJ_DIR) \
 $(LIB_DBG_OBJ_SUBDIRS) $(LIB_REL_OBJ_SUBDIRS) \

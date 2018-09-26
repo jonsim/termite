@@ -9,6 +9,9 @@
 #include <exception>
 #include <string>
 
+
+namespace termite {
+
 class WMException : std::exception
 {
 private:
@@ -24,12 +27,14 @@ public:
     /**
      *  \brief  WMException destructor.
      */
-    virtual ~WMException(void);
+    virtual ~WMException(void) {}
 
     virtual const char* what() const noexcept
     {
         return mMessage.c_str();
     }
 };
+
+}
 
 #endif

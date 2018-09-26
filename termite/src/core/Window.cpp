@@ -3,6 +3,11 @@
 #include <iostream> // std::ios
 #include <sstream>  // std::ostringstream
 
+#include "core/WMException.h"
+
+using namespace termite;
+
+
 Window::Window(uint16_t width, uint16_t height) :
     mWindow(nullptr),
     mWidth(width),
@@ -49,4 +54,9 @@ Window::~Window(void)
 {
     // Exit curses mode.
     endwin();
+}
+
+void Window::redraw(void) const
+{
+    wrefresh(mWindow);
 }
